@@ -62,23 +62,22 @@ static uint8_t buf[128*64/8];
 
 void drv_oled_begin(void)
 {
-	nrf_gpio_cfg_output(OLED_PIN_VDISP);
-	nrf_gpio_cfg_output(OLED_PIN_RESET);
-	nrf_gpio_cfg_output(OLED_PIN_DC);
-	nrf_gpio_cfg_output(OLED_PIN_CS);
-    
-    
-	
+	pinMode(OLED_PIN_VDISP, OUTPUT);
+	pinMode(OLED_PIN_RESET, OUTPUT);
+	pinMode(OLED_PIN_DC, OUTPUT);
+	pinMode(OLED_PIN_CS, OUTPUT);
+
 	//u8g2_Setup_ssd1306_128x64_noname_1(&u8g2, U8G2_R0,u8x8_byte_arduino_hw_spi, u8x8_gpio_and_delay_template);
 	u8g2_SetupDisplay(&u8g2, u8x8_d_ssd1306_128x64_noname, u8x8_cad_001, u8x8_byte_arduino_hw_spi, u8x8_gpio_and_delay_template);
   
     u8g2_SetupBuffer(&u8g2, buf, 8, u8g2_ll_hvline_vertical_top_lsb, U8G2_R0);
 	
-	nrf_gpio_pin_clear(OLED_PIN_RESET);
-	nrf_gpio_pin_set(OLED_PIN_VDISP);
+	digitalWrite(OLED_PIN_RESET, 0);
+	digitalWrite(OLED_PIN_VDISP, 1);
+    
     spi_init();
     
-	nrf_gpio_pin_set(OLED_PIN_RESET);	
+	digitalWrite(OLED_PIN_RESET, 1);	
     
 	u8g2_InitDisplay(&u8g2);
     u8g2_ClearDisplay(&u8g2);
@@ -89,5 +88,12 @@ void drv_oled_on(void)
 {
 
     u8g2_SetPowerSave(&u8g2, 0);
+			
+}
+
+void drv_oled_sleep(void)
+{
+
+    u8g2_SetPowerSave(&u8g2, 1);
 			
 }
