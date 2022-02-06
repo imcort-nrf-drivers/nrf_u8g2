@@ -81,7 +81,8 @@ void drv_oled_begin(void)
     
 	u8g2_InitDisplay(&u8g2);
     u8g2_ClearDisplay(&u8g2);
-	
+	u8g2_SetPowerSave(&u8g2, 0);
+    
 }
 
 void drv_oled_on(void)
