@@ -6,9 +6,9 @@
 
 #include "app_timer.h"
 #include "nrf_log.h"
-#include "disp_menu.h"
+//#include "disp_menu.h"
 
-#define SPI_INSTANCE  0 /**< SPI instance index. */
+#define SPI_INSTANCE  1 /**< SPI instance index. */
 static const nrf_drv_spi_t spi = NRF_DRV_SPI_INSTANCE(SPI_INSTANCE);  /**< SPI instance. */
 static volatile bool spi_xfer_done;  /**< Flag used to indicate that SPI instance completed the transfer. */
 
@@ -109,6 +109,7 @@ void drv_oled_begin(void)
 	APP_ERROR_CHECK(nrf_drv_spi_init(&spi, &spi_config, NULL, NULL));
 	nrf_gpio_pin_set(OLED_PIN_RESET);	
 	u8g2_InitDisplay(&u8g2);
+    u8g2_ClearDisplay(&u8g2);
 	
 }
 
@@ -135,7 +136,7 @@ void drv_oled_off(void)
 			u8g2_SetPowerSave(&u8g2, 1);
 			oled_power_en = false;
 	}
-			app_timer_stop(oled_auto_off_timer);
+			//app_timer_stop(oled_auto_off_timer);
 	
 }
 
