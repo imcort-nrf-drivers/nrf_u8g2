@@ -5,12 +5,12 @@
 #include "u8x8.h"
 
 //New PCB of NFC card
-#define OLED_PIN_CS  		3//2
-#define OLED_PIN_VDISP  2//3  
-#define OLED_PIN_RESET  4
-#define OLED_PIN_DC     5
-#define OLED_PIN_SCL    6
-#define OLED_PIN_SDA    7
+//#define OLED_PIN_CS  		3//2
+//#define OLED_PIN_VDISP  2//3  
+//#define OLED_PIN_RESET  4
+//#define OLED_PIN_DC     5
+//#define OLED_PIN_SCL    6
+//#define OLED_PIN_SDA    7
 
 //EINK
 //#define OLED_PIN_CS  		15
