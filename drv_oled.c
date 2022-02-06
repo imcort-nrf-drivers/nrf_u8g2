@@ -90,6 +90,8 @@ static uint8_t u8x8_gpio_and_delay_template(u8x8_t *u8x8, uint8_t msg, uint8_t a
   return 1;
 }
 
+static uint8_t buf[128*64/8];
+
 void drv_oled_begin(void)
 {
 	nrf_gpio_cfg_output(OLED_PIN_VDISP);
@@ -99,8 +101,8 @@ void drv_oled_begin(void)
 	
 	//u8g2_Setup_ssd1306_128x64_noname_1(&u8g2, U8G2_R0,u8x8_byte_arduino_hw_spi, u8x8_gpio_and_delay_template);
 	u8g2_SetupDisplay(&u8g2, u8x8_d_ssd1306_128x64_noname, u8x8_cad_001, u8x8_byte_arduino_hw_spi, u8x8_gpio_and_delay_template);
-  static uint8_t buf[128];
-  u8g2_SetupBuffer(&u8g2, buf, 1, u8g2_ll_hvline_vertical_top_lsb, U8G2_R0);
+  
+  u8g2_SetupBuffer(&u8g2, buf, 8, u8g2_ll_hvline_vertical_top_lsb, U8G2_R0);
 	
 	APP_ERROR_CHECK(app_timer_create(&oled_auto_off_timer, APP_TIMER_MODE_SINGLE_SHOT, oled_auto_off_timer_handler));
 	
@@ -123,7 +125,7 @@ void drv_oled_on(void)
 		
 	}
 			app_timer_stop(oled_auto_off_timer);
-			app_timer_start(oled_auto_off_timer, auto_off_time, NULL);
+			//app_timer_start(oled_auto_off_timer, auto_off_time, NULL);
 			
 			//disp_menu_draw();
 			
